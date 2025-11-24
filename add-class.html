@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Class - Allied School</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .form-container {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            margin: 30px auto;
+            max-width: 800px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .success-message {
+            background: var(--success);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .class-preview {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .preview-item {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/923038776223" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="navbar glass">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Allied School</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                    <a href="classes.html"><i class="fas fa-users"></i> Classes</a>
+                    <a href="admin-dashboard.html"><i class="fas fa-user-cog"></i> Admin</a>
+                    <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Add New Class</h1>
+                    <p>Create a new class with complete timetable and teacher assignments</p>
+                </div>
+                <a href="admin-dashboard.html" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Form -->
+    <div class="container">
+        <div class="form-container glass">
+            <div id="success-message" class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <span>New class created successfully!</span>
+            </div>
+            
+            <form id="add-class-form">
+                <h2 style="color: white; margin-bottom: 30px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-plus-circle"></i> Class Information
+                </h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="class-name"><i class="fas fa-chalkboard"></i> Class Name *</label>
+                        <input type="text" id="class-name" class="form-control" placeholder="e.g., Class 11, Class 12" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="class-level"><i class="fas fa-layer-group"></i> Class Level *</label>
+                        <select id="class-level" class="form-control" required>
+                            <option value="">Select Level</option>
+                            <option value="primary">Primary (1-5)</option>
+                            <option value="middle">Middle (6-8)</option>
+                            <option value="secondary">Secondary (9-10)</option>
+                            <option value="higher">Higher Secondary (11-12)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="class-capacity"><i class="fas fa-users"></i> Student Capacity</label>
+                        <input type="number" id="class-capacity" class="form-control" placeholder="e.g., 40" min="1" max="60">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="class-room"><i class="fas fa-door-open"></i> Classroom Number</label>
+                        <input type="text" id="class-room" class="form-control" placeholder="e.g., Room 101">
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="class-description"><i class="fas fa-file-alt"></i> Class Description</label>
+                        <textarea id="class-description" class="form-control" rows="3" placeholder="Brief description of the class..."></textarea>
+                    </div>
+                </div>
+
+                <h3 style="color: white; margin: 40px 0 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-clock"></i> Default Timetable Setup
+                </h3>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="start-time"><i class="fas fa-play"></i> School Start Time</label>
+                        <input type="time" id="start-time" class="form-control" value="08:00" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="end-time"><i class="fas fa-stop"></i> School End Time</label>
+                        <input type="time" id="end-time" class="form-control" value="14:00" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="period-duration"><i class="fas fa-hourglass"></i> Period Duration (minutes)</label>
+                        <input type="number" id="period-duration" class="form-control" value="45" min="30" max="60">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="break-duration"><i class="fas fa-coffee"></i> Break Duration (minutes)</label>
+                        <input type="number" id="break-duration" class="form-control" value="15" min="10" max="30">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="previewClass()">
+                        <i class="fas fa-eye"></i> Preview
+                    </button>
+                    <button type="reset" class="btn btn-outline">
+                        <i class="fas fa-redo"></i> Reset Form
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Create Class
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Class Preview -->
+        <div id="class-preview" class="class-preview" style="display: none;">
+            <h3 style="color: white; margin-bottom: 20px;">
+                <i class="fas fa-eye"></i> Class Preview
+            </h3>
+            <div class="preview-grid">
+                <div class="preview-item">
+                    <strong>Class Name:</strong>
+                    <span id="preview-name">-</span>
+                </div>
+                <div class="preview-item">
+                    <strong>Level:</strong>
+                    <span id="preview-level">-</span>
+                </div>
+                <div class="preview-item">
+                    <strong>Capacity:</strong>
+                    <span id="preview-capacity">-</span>
+                </div>
+                <div class="preview-item">
+                    <strong>Room:</strong>
+                    <span id="preview-room">-</span>
+                </div>
+                <div class="preview-item">
+                    <strong>Timing:</strong>
+                    <span id="preview-timing">-</span>
+                </div>
+                <div class="preview-item">
+                    <strong>Periods:</strong>
+                    <span id="preview-periods">-</span>
+                </div>
+            </div>
+            <div class="preview-item full-width" style="margin-top: 15px;">
+                <strong>Description:</strong>
+                <p id="preview-description" style="margin: 5px 0 0 0; color: rgba(255,255,255,0.8);">-</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Allied School</h3>
+                    <p>Providing quality education with modern technology and innovative teaching methods since 1995.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="classes.html"><i class="fas fa-chevron-right"></i> Classes</a></li>
+                        <li><a href="admin-dashboard.html"><i class="fas fa-chevron-right"></i> Admin</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Education Street, City</a></li>
+                        <li><a href="tel:+923001234567"><i class="fas fa-phone"></i> +92 300 1234567</a></li>
+                        <li><a href="mailto:info@alliedschool.edu"><i class="fas fa-envelope"></i> info@alliedschool.edu</a></li>
+                        <li><a href="https://wa.me/923038776223" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Allied School Timetable System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Check admin login
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('adminLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'admin-login.html';
+            }
+
+            // Form submission
+            document.getElementById('add-class-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                createNewClass();
+            });
+        });
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('adminLoggedIn');
+            window.location.href = 'admin-login.html';
+        });
+
+        function previewClass() {
+            const className = document.getElementById('class-name').value;
+            const classLevel = document.getElementById('class-level').value;
+            const capacity = document.getElementById('class-capacity').value;
+            const room = document.getElementById('class-room').value;
+            const description = document.getElementById('class-description').value;
+            const startTime = document.getElementById('start-time').value;
+            const endTime = document.getElementById('end-time').value;
+            const periodDuration = document.getElementById('period-duration').value;
+
+            if (!className || !classLevel) {
+                alert('Please fill in required fields first!');
+                return;
+            }
+
+            // Update preview
+            document.getElementById('preview-name').textContent = className;
+            document.getElementById('preview-level').textContent = classLevel.charAt(0).toUpperCase() + classLevel.slice(1);
+            document.getElementById('preview-capacity').textContent = capacity || 'Not set';
+            document.getElementById('preview-room').textContent = room || 'Not assigned';
+            document.getElementById('preview-description').textContent = description || 'No description provided';
+            document.getElementById('preview-timing').textContent = `${startTime} - ${endTime}`;
+            
+            // Calculate number of periods
+            const start = new Date(`2000-01-01T${startTime}`);
+            const end = new Date(`2000-01-01T${endTime}`);
+            const totalMinutes = (end - start) / (1000 * 60);
+            const breakTime = parseInt(document.getElementById('break-duration').value) || 15;
+            const periods = Math.floor((totalMinutes - breakTime) / periodDuration);
+            document.getElementById('preview-periods').textContent = `${periods} periods`;
+
+            // Show preview
+            document.getElementById('class-preview').style.display = 'block';
+        }
+
+        function createNewClass() {
+            const className = document.getElementById('class-name').value;
+            const classLevel = document.getElementById('class-level').value;
+            const capacity = document.getElementById('class-capacity').value;
+            const room = document.getElementById('class-room').value;
+            const description = document.getElementById('class-description').value;
+            const startTime = document.getElementById('start-time').value;
+            const endTime = document.getElementById('end-time').value;
+            const periodDuration = document.getElementById('period-duration').value;
+            const breakDuration = document.getElementById('break-duration').value;
+
+            if (!className || !classLevel) {
+                alert('Please fill in all required fields!');
+                return;
+            }
+
+            // Generate class ID (get next available number)
+            const existingClasses = Object.keys(localStorage)
+                .filter(key => key.startsWith('class') && key.endsWith('Data'))
+                .map(key => parseInt(key.replace('class', '').replace('Data', '')))
+                .filter(num => !isNaN(num));
+
+            const nextClassId = existingClasses.length > 0 ? Math.max(...existingClasses) + 1 : 11;
+
+            // Create class data structure
+            const classData = {
+                id: nextClassId,
+                name: className,
+                level: classLevel,
+                capacity: capacity || 40,
+                room: room || `Room ${nextClassId + 100}`,
+                description: description || `${className} - ${classLevel} level class`,
+                timing: {
+                    start: startTime,
+                    end: endTime,
+                    periodDuration: parseInt(periodDuration),
+                    breakDuration: parseInt(breakDuration)
+                },
+                monfri: generateDefaultTimetable(startTime, endTime, periodDuration, breakDuration),
+                saturday: generateSaturdayTimetable(startTime, endTime, periodDuration, breakDuration),
+                teachers: [],
+                createdAt: new Date().toISOString()
+            };
+
+            // Save to localStorage
+            localStorage.setItem(`class${nextClassId}Data`, JSON.stringify(classData));
+
+            // Update classes list
+            updateClassesList(nextClassId, className);
+
+            // Show success message
+            const successMessage = document.getElementById('success-message');
+            successMessage.style.display = 'flex';
+            successMessage.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>Class "${className}" created successfully with ID: ${nextClassId}</span>
+            `;
+
+            // Reset form
+            document.getElementById('add-class-form').reset();
+            document.getElementById('class-preview').style.display = 'none';
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        function generateDefaultTimetable(startTime, endTime, periodDuration, breakDuration) {
+            const periods = [];
+            let currentTime = new Date(`2000-01-01T${startTime}`);
+            const end = new Date(`2000-01-01T${endTime}`);
+            const periodMs = parseInt(periodDuration) * 60 * 1000;
+            const breakMs = parseInt(breakDuration) * 60 * 1000;
+
+            const defaultSubjects = ['English', 'Mathematics', 'Science', 'Social Studies', 'Urdu', 'Computer', 'Art', 'Physical Education'];
+
+            let periodCount = 0;
+            let hasBreak = false;
+
+            while (currentTime < end && periodCount < 8) {
+                const periodEnd = new Date(currentTime.getTime() + periodMs);
+                
+                if (periodEnd > end) break;
+
+                // Add break after 3rd period
+                if (periodCount === 3 && !hasBreak) {
+                    const breakStart = new Date(periodEnd);
+                    const breakEnd = new Date(breakStart.getTime() + breakMs);
+                    
+                    if (breakEnd <= end) {
+                        periods.push({
+                            time: `${formatTime(breakStart)} - ${formatTime(breakEnd)}`,
+                            subject: 'Break',
+                            teacher: '-',
+                            room: 'Playground/Cafeteria'
+                        });
+                        currentTime = breakEnd;
+                        hasBreak = true;
+                        continue;
+                    }
+                }
+
+                const subject = defaultSubjects[periodCount % defaultSubjects.length];
+                periods.push({
+                    time: `${formatTime(currentTime)} - ${formatTime(periodEnd)}`,
+                    subject: subject,
+                    teacher: 'To be assigned',
+                    room: 'To be assigned'
+                });
+
+                currentTime = periodEnd;
+                periodCount++;
+            }
+
+            return periods;
+        }
+
+        function generateSaturdayTimetable(startTime, endTime, periodDuration, breakDuration) {
+            const periods = [];
+            let currentTime = new Date(`2000-01-01T${startTime}`);
+            const end = new Date(`2000-01-01T${endTime}`);
+            const periodMs = parseInt(periodDuration) * 60 * 1000;
+            const breakMs = parseInt(breakDuration) * 60 * 1000;
+
+            const saturdaySubjects = ['Quran', 'Moral Science', 'General Knowledge', 'Library', 'Art', 'Physical Education', 'Computer Lab'];
+
+            let periodCount = 0;
+            let hasBreak = false;
+
+            while (currentTime < end && periodCount < 6) {
+                const periodEnd = new Date(currentTime.getTime() + periodMs);
+                
+                if (periodEnd > end) break;
+
+                // Add break after 2nd period
+                if (periodCount === 2 && !hasBreak) {
+                    const breakStart = new Date(periodEnd);
+                    const breakEnd = new Date(breakStart.getTime() + breakMs);
+                    
+                    if (breakEnd <= end) {
+                        periods.push({
+                            time: `${formatTime(breakStart)} - ${formatTime(breakEnd)}`,
+                            subject: 'Break',
+                            teacher: '-',
+                            room: 'Playground/Cafeteria'
+                        });
+                        currentTime = breakEnd;
+                        hasBreak = true;
+                        continue;
+                    }
+                }
+
+                const subject = saturdaySubjects[periodCount % saturdaySubjects.length];
+                periods.push({
+                    time: `${formatTime(currentTime)} - ${formatTime(periodEnd)}`,
+                    subject: subject,
+                    teacher: 'To be assigned',
+                    room: 'To be assigned'
+                });
+
+                currentTime = periodEnd;
+                periodCount++;
+            }
+
+            return periods;
+        }
+
+        function formatTime(date) {
+            return date.toTimeString().slice(0, 5);
+        }
+
+        function updateClassesList(classId, className) {
+            // Update the classes list in localStorage or create if not exists
+            let classesList = JSON.parse(localStorage.getItem('classesList')) || [];
+            
+            if (!classesList.find(cls => cls.id === classId)) {
+                classesList.push({
+                    id: classId,
+                    name: className,
+                    level: document.getElementById('class-level').value,
+                    room: document.getElementById('class-room').value || `Room ${classId + 100}`,
+                    studentCount: 0
+                });
+                
+                localStorage.setItem('classesList', JSON.stringify(classesList));
+            }
+        }
+    </script>
+</body>
+</html>
