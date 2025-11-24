@@ -6,469 +6,7 @@
     <title>Allied School - Modern Timetable System</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #3b82f6;
-            --accent: #8b5cf6;
-            --light: rgba(255, 255, 255, 0.9);
-            --dark: #1e293b;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --gray: #64748b;
-            --gray-light: rgba(226, 232, 240, 0.5);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
-            --radius: 20px;
-            --glass: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.18);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: var(--dark);
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Glass Effect Styles */
-        .glass {
-            background: var(--glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow);
-            border-radius: var(--radius);
-        }
-
-        .glass-dark {
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: var(--shadow);
-            border-radius: var(--radius);
-        }
-
-        /* Header Styles */
-        header {
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .logo i {
-            font-size: 2.2rem;
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: white;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 80px 0 60px;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: white;
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 700px;
-            margin: 0 auto 40px;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        /* Class Selection */
-        .class-selection {
-            margin: 40px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            color: white;
-            font-size: 2.2rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .class-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-
-        .class-card {
-            padding: 30px;
-            text-align: center;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .class-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s;
-        }
-
-        .class-card:hover::before {
-            left: 100%;
-        }
-
-        .class-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .class-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #4facfe, #00f2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .class-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: white;
-        }
-
-        .class-card p {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 20px;
-        }
-
-        /* Timetable Sections */
-        .timetable-section {
-            display: none;
-            margin-top: 40px;
-            animation: fadeIn 0.8s ease;
-        }
-
-        .timetable-section.active {
-            display: block;
-        }
-
-        .timetable-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .timetable-title {
-            font-size: 2rem;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .timetable-container {
-            padding: 30px;
-            margin-bottom: 40px;
-        }
-
-        .timetable {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .timetable th {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 18px;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .timetable td {
-            padding: 18px;
-            border-bottom: 1px solid var(--glass-border);
-            color: white;
-        }
-
-        .timetable tr {
-            transition: all 0.3s ease;
-        }
-
-        .timetable tr:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-        }
-
-        .time-cell {
-            font-weight: 600;
-            color: #4facfe;
-        }
-
-        .subject-cell {
-            font-weight: 500;
-        }
-
-        .teacher-cell {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            color: white;
-            padding: 14px 28px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* WhatsApp Button */
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            z-index: 1000;
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-
-        .whatsapp-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
-        }
-
-        /* Footer */
-        footer {
-            padding: 40px 0;
-            margin-top: 80px;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-            margin-bottom: 30px;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 20px;
-            color: white;
-            font-size: 1.4rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-section ul li a {
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.8);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-section ul li a:hover {
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 30px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .nav-links {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .class-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .timetable-header {
-                flex-direction: column;
-                gap: 20px;
-                align-items: flex-start;
-            }
-
-            .footer-content {
-                flex-direction: column;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- WhatsApp Button -->
@@ -485,298 +23,93 @@
                     <span>Allied School</span>
                 </div>
                 <div class="nav-links">
-                    <a href="#home"><i class="fas fa-home"></i> Home</a>
-                    <a href="#classes"><i class="fas fa-users"></i> Classes</a>
-                    <a href="#timetable"><i class="fas fa-calendar-alt"></i> Timetable</a>
-                    <a href="admin.html"><i class="fas fa-user-cog"></i> Admin</a>
+                    <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+                    <a href="classes.html"><i class="fas fa-users"></i> Classes</a>
+                    <a href="admin-login.html"><i class="fas fa-user-cog"></i> Admin</a>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero">
         <div class="container">
             <h1>Allied School Timetable System</h1>
             <p>Experience our modern, interactive timetable system with beautiful glass design and smooth animations</p>
-            <a href="#classes" class="btn">
-                <i class="fas fa-arrow-down"></i> Explore Classes
-            </a>
+            <div class="hero-buttons">
+                <a href="classes.html" class="btn btn-primary">
+                    <i class="fas fa-users"></i> View All Classes
+                </a>
+                <a href="admin-login.html" class="btn btn-outline">
+                    <i class="fas fa-user-cog"></i> Admin Panel
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- Class Selection -->
-    <section class="class-selection" id="classes">
+    <!-- Features Section -->
+    <section class="features">
         <div class="container">
-            <h2 class="section-title">Select Your Class</h2>
-            <div class="class-grid">
-                <!-- Class 1 to 10 Cards -->
-                <div class="class-card glass" onclick="showTimetable('class1')">
-                    <i class="fas fa-book class-icon"></i>
+            <h2 class="section-title">Why Choose Our System?</h2>
+            <div class="features-grid">
+                <div class="feature-card glass">
+                    <i class="fas fa-clock"></i>
+                    <h3>Real-time Updates</h3>
+                    <p>Get instant updates on timetable changes and class schedules</p>
+                </div>
+                <div class="feature-card glass">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Friendly</h3>
+                    <p>Access your timetable from any device, anywhere</p>
+                </div>
+                <div class="feature-card glass">
+                    <i class="fas fa-bell"></i>
+                    <h3>Smart Notifications</h3>
+                    <p>Never miss important class updates or changes</p>
+                </div>
+                <div class="feature-card glass">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Analytics</h3>
+                    <p>Track your academic progress and attendance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Classes Preview -->
+    <section class="quick-classes">
+        <div class="container">
+            <h2 class="section-title">Popular Classes</h2>
+            <div class="class-preview-grid">
+                <div class="class-preview-card glass" onclick="location.href='class-detail.html?class=1'">
+                    <div class="class-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
                     <h3>Class 1</h3>
-                    <p>Beginner level courses and activities</p>
-                    <div class="btn btn-outline">View Timetable</div>
+                    <p>Beginner Level Courses</p>
+                    <div class="view-btn">View Timetable</div>
                 </div>
-                
-                <div class="class-card glass" onclick="showTimetable('class2')">
-                    <i class="fas fa-pencil-alt class-icon"></i>
-                    <h3>Class 2</h3>
-                    <p>Elementary education schedule</p>
-                    <div class="btn btn-outline">View Timetable</div>
-                </div>
-                
-                <div class="class-card glass" onclick="showTimetable('class3')">
-                    <i class="fas fa-calculator class-icon"></i>
-                    <h3>Class 3</h3>
-                    <p>Developing skills and knowledge</p>
-                    <div class="btn btn-outline">View Timetable</div>
-                </div>
-                
-                <div class="class-card glass" onclick="showTimetable('class4')">
-                    <i class="fas fa-flask class-icon"></i>
-                    <h3>Class 4</h3>
-                    <p>Intermediate learning program</p>
-                    <div class="btn btn-outline">View Timetable</div>
-                </div>
-                
-                <div class="class-card glass" onclick="showTimetable('class5')">
-                    <i class="fas fa-globe class-icon"></i>
+                <div class="class-preview-card glass" onclick="location.href='class-detail.html?class=5'">
+                    <div class="class-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
                     <h3>Class 5</h3>
-                    <p>Comprehensive subject coverage</p>
-                    <div class="btn btn-outline">View Timetable</div>
+                    <p>Intermediate Level</p>
+                    <div class="view-btn">View Timetable</div>
                 </div>
-                
-                <div class="class-card glass" onclick="showTimetable('class6')">
-                    <i class="fas fa-atom class-icon"></i>
-                    <h3>Class 6</h3>
-                    <p>Advanced elementary education</p>
-                    <div class="btn btn-outline">View Timetable</div>
-                </div>
-                
-                <div class="class-card glass" onclick="showTimetable('class7')">
-                    <i class="fas fa-history class-icon"></i>
-                    <h3>Class 7</h3>
-                    <p>Middle school curriculum</p>
-                    <div class="btn btn-outline">View Timetable</div>
-                </div>
-                
-                <div class="class-card glass" onclick="showTimetable('class8')">
-                    <i class="fas fa-dna class-icon"></i>
-                    <h3>Class 8</h3>
-                    <p>Preparing for higher education</p>
-                    <div class="btn btn-outline">View Timetable</div>
-                </div>
-                
-                <div class="class-card glass" onclick="showTimetable('class9')">
-                    <i class="fas fa-rocket class-icon"></i>
-                    <h3>Class 9</h3>
-                    <p>Secondary education program</p>
-                    <div class="btn btn-outline">View Timetable</div>
-                </div>
-                
-                <div class="class-card glass" onclick="showTimetable('class10')">
-                    <i class="fas fa-gem class-icon"></i>
+                <div class="class-preview-card glass" onclick="location.href='class-detail.html?class=10'">
+                    <div class="class-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
                     <h3>Class 10</h3>
-                    <p>Matriculation preparation</p>
-                    <div class="btn btn-outline">View Timetable</div>
+                    <p>Matriculation Level</p>
+                    <div class="view-btn">View Timetable</div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Timetable Sections -->
-    <section id="timetable">
-        <div class="container">
-            <!-- Class 1 Timetable -->
-            <div id="class1-timetable" class="timetable-section">
-                <div class="timetable-container glass">
-                    <div class="timetable-header">
-                        <h2 class="timetable-title">
-                            <i class="fas fa-book"></i> Class 1 Timetable
-                        </h2>
-                        <button class="btn btn-outline" onclick="hideAllTimetables()">
-                            <i class="fas fa-arrow-left"></i> Back to Classes
-                        </button>
-                    </div>
-                    
-                    <table class="timetable">
-                        <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Subject</th>
-                                <th>Teacher</th>
-                                <th>Room</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="time-cell">08:00 - 08:45</td>
-                                <td class="subject-cell">English</td>
-                                <td class="teacher-cell">Ms. Sarah</td>
-                                <td>Room 101</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">08:45 - 09:30</td>
-                                <td class="subject-cell">Mathematics</td>
-                                <td class="teacher-cell">Mr. Ahmed</td>
-                                <td>Room 102</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">09:30 - 10:15</td>
-                                <td class="subject-cell">Science</td>
-                                <td class="teacher-cell">Ms. Fatima</td>
-                                <td>Lab 1</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">10:15 - 10:30</td>
-                                <td class="subject-cell">Break</td>
-                                <td class="teacher-cell">-</td>
-                                <td>Playground</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">10:30 - 11:15</td>
-                                <td class="subject-cell">Urdu</td>
-                                <td class="teacher-cell">Mr. Ali</td>
-                                <td>Room 101</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">11:15 - 12:00</td>
-                                <td class="subject-cell">Art</td>
-                                <td class="teacher-cell">Ms. Amina</td>
-                                <td>Art Room</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Class 2 Timetable -->
-            <div id="class2-timetable" class="timetable-section">
-                <div class="timetable-container glass">
-                    <div class="timetable-header">
-                        <h2 class="timetable-title">
-                            <i class="fas fa-pencil-alt"></i> Class 2 Timetable
-                        </h2>
-                        <button class="btn btn-outline" onclick="hideAllTimetables()">
-                            <i class="fas fa-arrow-left"></i> Back to Classes
-                        </button>
-                    </div>
-                    
-                    <table class="timetable">
-                        <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Subject</th>
-                                <th>Teacher</th>
-                                <th>Room</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="time-cell">08:00 - 08:45</td>
-                                <td class="subject-cell">Mathematics</td>
-                                <td class="teacher-cell">Mr. Ahmed</td>
-                                <td>Room 201</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">08:45 - 09:30</td>
-                                <td class="subject-cell">English</td>
-                                <td class="teacher-cell">Ms. Sarah</td>
-                                <td>Room 202</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">09:30 - 10:15</td>
-                                <td class="subject-cell">Social Studies</td>
-                                <td class="teacher-cell">Mr. Khan</td>
-                                <td>Room 203</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">10:15 - 10:30</td>
-                                <td class="subject-cell">Break</td>
-                                <td class="teacher-cell">-</td>
-                                <td>Playground</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">10:30 - 11:15</td>
-                                <td class="subject-cell">Science</td>
-                                <td class="teacher-cell">Ms. Fatima</td>
-                                <td>Lab 1</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">11:15 - 12:00</td>
-                                <td class="subject-cell">Quran</td>
-                                <td class="teacher-cell">Mr. Hassan</td>
-                                <td>Room 201</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Add similar sections for Class 3 to 10 -->
-            <!-- For brevity, I'll show one more example -->
-
-            <!-- Class 10 Timetable -->
-            <div id="class10-timetable" class="timetable-section">
-                <div class="timetable-container glass">
-                    <div class="timetable-header">
-                        <h2 class="timetable-title">
-                            <i class="fas fa-gem"></i> Class 10 Timetable
-                        </h2>
-                        <button class="btn btn-outline" onclick="hideAllTimetables()">
-                            <i class="fas fa-arrow-left"></i> Back to Classes
-                        </button>
-                    </div>
-                    
-                    <table class="timetable">
-                        <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Subject</th>
-                                <th>Teacher</th>
-                                <th>Room</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="time-cell">08:00 - 08:45</td>
-                                <td class="subject-cell">Physics</td>
-                                <td class="teacher-cell">Dr. Rizwan</td>
-                                <td>Lab 2</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">08:45 - 09:30</td>
-                                <td class="subject-cell">Chemistry</td>
-                                <td class="teacher-cell">Dr. Sana</td>
-                                <td>Lab 3</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">09:30 - 10:15</td>
-                                <td class="subject-cell">Mathematics</td>
-                                <td class="teacher-cell">Mr. Ahmed</td>
-                                <td>Room 1001</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">10:15 - 10:30</td>
-                                <td class="subject-cell">Break</td>
-                                <td class="teacher-cell">-</td>
-                                <td>Cafeteria</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">10:30 - 11:15</td>
-                                <td class="subject-cell">Biology</td>
-                                <td class="teacher-cell">Ms. Ayesha</td>
-                                <td>Lab 1</td>
-                            </tr>
-                            <tr>
-                                <td class="time-cell">11:15 - 12:00</td>
-                                <td class="subject-cell">Computer Science</td>
-                                <td class="teacher-cell">Mr. Farhan</td>
-                                <td>Computer Lab</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="text-center">
+                <a href="classes.html" class="btn btn-outline">
+                    <i class="fas fa-arrow-right"></i> View All Classes
+                </a>
             </div>
         </div>
     </section>
@@ -792,10 +125,9 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
-                        <li><a href="#classes"><i class="fas fa-chevron-right"></i> Classes</a></li>
-                        <li><a href="#timetable"><i class="fas fa-chevron-right"></i> Timetable</a></li>
-                        <li><a href="admin.html"><i class="fas fa-chevron-right"></i> Admin Panel</a></li>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="classes.html"><i class="fas fa-chevron-right"></i> Classes</a></li>
+                        <li><a href="admin-login.html"><i class="fas fa-chevron-right"></i> Admin</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -814,54 +146,6 @@
         </div>
     </footer>
 
-    <script>
-        // Function to show specific class timetable
-        function showTimetable(className) {
-            // Hide all timetable sections
-            hideAllTimetables();
-            
-            // Show the selected timetable
-            const timetableSection = document.getElementById(`${className}-timetable`);
-            if (timetableSection) {
-                timetableSection.classList.add('active');
-                
-                // Scroll to the timetable section
-                timetableSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Function to hide all timetable sections
-        function hideAllTimetables() {
-            const timetableSections = document.querySelectorAll('.timetable-section');
-            timetableSections.forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Scroll back to classes section
-            document.getElementById('classes').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add animation to class cards on load
-            const classCards = document.querySelectorAll('.class-card');
-            classCards.forEach((card, index) => {
-                card.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s both`;
-            });
-            
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
