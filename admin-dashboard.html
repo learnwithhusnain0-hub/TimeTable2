@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Allied School</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/923038776223" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="navbar glass">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Allied School</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                    <a href="classes.html"><i class="fas fa-users"></i> Classes</a>
+                    <a href="admin-dashboard.html" class="active"><i class="fas fa-user-cog"></i> Admin</a>
+                    <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Admin Dashboard</h1>
+                    <p>Manage school timetable and class schedules</p>
+                </div>
+                <div class="admin-welcome">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Welcome, Admin</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Stats -->
+    <section class="dashboard-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card glass">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>10</h3>
+                        <p>Total Classes</p>
+                    </div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>45</h3>
+                        <p>Teachers</p>
+                    </div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>15</h3>
+                        <p>Subjects</p>
+                    </div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>120</h3>
+                        <p>Weekly Periods</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Actions -->
+    <section class="admin-actions">
+        <div class="container">
+            <h2 class="section-title">Management Tools</h2>
+            <div class="actions-grid">
+                <div class="action-card glass" onclick="location.href='edit-timetable.html'">
+                    <div class="action-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Edit Timetables</h3>
+                    <p>Modify class schedules and timings</p>
+                    <div class="action-btn">Manage</div>
+                </div>
+                
+                <div class="action-card glass">
+                    <div class="action-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3>Add New Class</h3>
+                    <p>Create new class schedules</p>
+                    <div class="action-btn">Add New</div>
+                </div>
+                
+                <div class="action-card glass">
+                    <div class="action-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3>Manage Teachers</h3>
+                    <p>Add or remove teaching staff</p>
+                    <div class="action-btn">Manage</div>
+                </div>
+                
+                <div class="action-card glass">
+                    <div class="action-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>System Settings</h3>
+                    <p>Configure system preferences</p>
+                    <div class="action-btn">Settings</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Class Management -->
+    <section class="quick-management">
+        <div class="container">
+            <div class="management-container glass">
+                <h2><i class="fas fa-tachometer-alt"></i> Quick Class Access</h2>
+                <div class="class-quick-links">
+                    <!-- Quick links for classes 1-10 -->
+                    <div class="class-quick-link" onclick="location.href='edit-timetable.html?class=1'">
+                        <span>Class 1</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="class-quick-link" onclick="location.href='edit-timetable.html?class=2'">
+                        <span>Class 2</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <!-- Add similar links for other classes -->
+                    <div class="class-quick-link" onclick="location.href='edit-timetable.html?class=10'">
+                        <span>Class 10</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Allied School</h3>
+                    <p>Providing quality education with modern technology and innovative teaching methods since 1995.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="classes.html"><i class="fas fa-chevron-right"></i> Classes</a></li>
+                        <li><a href="admin-dashboard.html"><i class="fas fa-chevron-right"></i> Admin</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Education Street, City</a></li>
+                        <li><a href="tel:+923001234567"><i class="fas fa-phone"></i> +92 300 1234567</a></li>
+                        <li><a href="mailto:info@alliedschool.edu"><i class="fas fa-envelope"></i> info@alliedschool.edu</a></li>
+                        <li><a href="https://wa.me/923038776223" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Allied School Timetable System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Check if admin is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('adminLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'admin-login.html';
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('adminLoggedIn');
+            window.location.href = 'admin-login.html';
+        });
+    </script>
+</body>
+</html>
