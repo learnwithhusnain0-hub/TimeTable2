@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Timetable - Allied School</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/923038776223" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="navbar glass">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Allied School</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                    <a href="classes.html"><i class="fas fa-users"></i> Classes</a>
+                    <a href="admin-login.html"><i class="fas fa-user-cog"></i> Admin</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Class Detail Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="class-detail-header">
+                <div class="class-title">
+                    <h1 id="className">Class Timetable</h1>
+                    <p id="classDescription">Weekly schedule and subject details</p>
+                </div>
+                <a href="classes.html" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i> Back to Classes
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timetable Section -->
+    <section class="timetable-section">
+        <div class="container">
+            <div class="timetable-container glass">
+                <div class="timetable-header">
+                    <h2><i class="fas fa-calendar-alt"></i> Weekly Timetable</h2>
+                    <div class="schedule-toggle">
+                        <button class="btn-toggle active" data-schedule="monfri">Monday-Friday</button>
+                        <button class="btn-toggle" data-schedule="saturday">Saturday</button>
+                    </div>
+                </div>
+
+                <!-- Monday-Friday Timetable -->
+                <div id="monfri-timetable" class="timetable-content active">
+                    <table class="timetable">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Subject</th>
+                                <th>Teacher</th>
+                                <th>Room</th>
+                            </tr>
+                        </thead>
+                        <tbody id="monfri-timetable-body">
+                            <!-- Timetable data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Saturday Timetable -->
+                <div id="saturday-timetable" class="timetable-content">
+                    <table class="timetable">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Subject</th>
+                                <th>Teacher</th>
+                                <th>Room</th>
+                            </tr>
+                        </thead>
+                        <tbody id="saturday-timetable-body">
+                            <!-- Timetable data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Class Teachers -->
+    <section class="teachers-section">
+        <div class="container">
+            <div class="teachers-container glass">
+                <h2><i class="fas fa-chalkboard-teacher"></i> Class Teachers</h2>
+                <div class="teachers-grid" id="teachers-list">
+                    <!-- Teachers will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Allied School</h3>
+                    <p>Providing quality education with modern technology and innovative teaching methods since 1995.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="classes.html"><i class="fas fa-chevron-right"></i> Classes</a></li>
+                        <li><a href="admin-login.html"><i class="fas fa-chevron-right"></i> Admin</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Education Street, City</a></li>
+                        <li><a href="tel:+923001234567"><i class="fas fa-phone"></i> +92 300 1234567</a></li>
+                        <li><a href="mailto:info@alliedschool.edu"><i class="fas fa-envelope"></i> info@alliedschool.edu</a></li>
+                        <li><a href="https://wa.me/923038776223" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Allied School Timetable System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Load class data based on URL parameter
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const classId = urlParams.get('class') || '1';
+            
+            loadClassData(classId);
+            setupScheduleToggle();
+        });
+
+        function loadClassData(classId) {
+            // Get class data from localStorage or use default
+            const classData = JSON.parse(localStorage.getItem(`class${classId}Data`)) || getDefaultClassData(classId);
+            
+            // Update page title and info
+            document.getElementById('className').textContent = `Class ${classId} Timetable`;
+            document.getElementById('classDescription').textContent = classData.description;
+            
+            // Load timetables
+            loadTimetable('monfri', classData.monfri);
+            loadTimetable('saturday', classData.saturday);
+            
+            // Load teachers
+            loadTeachers(classData.teachers);
+        }
+
+        function getDefaultClassData(classId) {
+            // Default data for each class
+            const defaultData = {
+                '1': {
+                    description: 'Beginner level courses and foundational learning',
+                    monfri: [
+                        { time: '08:00 - 08:45', subject: 'English', teacher: 'Ms. Sarah', room: '101' },
+                        { time: '08:45 - 09:30', subject: 'Mathematics', teacher: 'Mr. Ahmed', room: '102' },
+                        { time: '09:30 - 10:15', subject: 'Science', teacher: 'Ms. Fatima', room: 'Lab 1' },
+                        { time: '10:15 - 10:30', subject: 'Break', teacher: '-', room: 'Playground' },
+                        { time: '10:30 - 11:15', subject: 'Urdu', teacher: 'Mr. Ali', room: '101' },
+                        { time: '11:15 - 12:00', subject: 'Art', teacher: 'Ms. Amina', room: 'Art Room' }
+                    ],
+                    saturday: [
+                        { time: '08:00 - 08:45', subject: 'Quran', teacher: 'Mr. Hassan', room: '101' },
+                        { time: '08:45 - 09:30', subject: 'General Knowledge', teacher: 'Ms. Sara', room: '102' },
+                        { time: '09:30 - 10:15', subject: 'Physical Education', teacher: 'Mr. Rizwan', room: 'Ground' },
+                        { time: '10:15 - 10:30', subject: 'Break', teacher: '-', room: 'Playground' },
+                        { time: '10:30 - 11:15', subject: 'Computer', teacher: 'Ms. Sana', room: 'Lab' },
+                        { time: '11:15 - 12:00', subject: 'Library', teacher: 'Mr. Farhan', room: 'Library' }
+                    ],
+                    teachers: [
+                        { name: 'Ms. Sarah', subject: 'English', email: 'sarah@alliedschool.edu' },
+                        { name: 'Mr. Ahmed', subject: 'Mathematics', email: 'ahmed@alliedschool.edu' },
+                        { name: 'Ms. Fatima', subject: 'Science', email: 'fatima@alliedschool.edu' },
+                        { name: 'Mr. Ali', subject: 'Urdu', email: 'ali@alliedschool.edu' },
+                        { name: 'Ms. Amina', subject: 'Art', email: 'amina@alliedschool.edu' }
+                    ]
+                }
+                // Add similar data for other classes
+            };
+            
+            return defaultData[classId] || defaultData['1'];
+        }
+
+        function loadTimetable(type, data) {
+            const tbody = document.getElementById(`${type}-timetable-body`);
+            let html = '';
+            
+            data.forEach(item => {
+                html += `
+                    <tr>
+                        <td class="time-cell">${item.time}</td>
+                        <td class="subject-cell">${item.subject}</td>
+                        <td class="teacher-cell">${item.teacher}</td>
+                        <td>${item.room}</td>
+                    </tr>
+                `;
+            });
+            
+            tbody.innerHTML = html;
+        }
+
+        function loadTeachers(teachers) {
+            const teachersList = document.getElementById('teachers-list');
+            let html = '';
+            
+            teachers.forEach(teacher => {
+                html += `
+                    <div class="teacher-card">
+                        <div class="teacher-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="teacher-info">
+                            <h4>${teacher.name}</h4>
+                            <p>${teacher.subject}</p>
+                            <a href="mailto:${teacher.email}">${teacher.email}</a>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            teachersList.innerHTML = html;
+        }
+
+        function setupScheduleToggle() {
+            const buttons = document.querySelectorAll('.btn-toggle');
+            const contents = document.querySelectorAll('.timetable-content');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const target = this.getAttribute('data-schedule');
+                    
+                    // Update buttons
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update contents
+                    contents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(`${target}-timetable`).classList.add('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
